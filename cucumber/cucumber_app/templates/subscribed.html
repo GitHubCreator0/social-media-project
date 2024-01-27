@@ -3,24 +3,8 @@
 
 <div class="container-fluid">
     <div class="row">
-    <div class="col-2">
-
-
-        <div class="my-2">
-            <div style="box-shadow: 10px 10px 50px #6D5593; border-radius: 10px; width: 200px; height: 300px; background-color: #6D5593;">
-                <h4 class="mx-2 my-2">Available to Subscribe</h4>
-                {% for available_user in available_users %}
-                    <li class="rounded px-1 py-1 my-2 mx-2" style="background-color: #AA98A9; height: 40px; width: 160px;">
-                     <a style="text-decoration: none; color: black;" href="/profile_view/{{ available_user.id }}/">
-                        <img src="{{ available_user.image.url }}" height="35" width="35" class="rounded-circle">
-                        <span>@{{ available_user.username }}</span>
-                     </a></li>
-                {% endfor %}
-            </div>
-        </div>
-
+        <h1>Friends posts</h1>
     </div>
-        <div class="col-8">
     {% for post in posts %}
         <div class="d-flex justify-content-center row ">
             <div class="my-2" style="box-shadow: 10px 10px 50px #6D5593; border-radius: 10px; width: 500px; height: 490px; background-color: #a38fb0; ">
@@ -37,14 +21,14 @@
             </div>
         </div>
     {% endfor %}
-        </div>
+
 
     <div class="row">
 
     </div>
 
 </div>
-</div>
+
 
 
 {% endblock %}

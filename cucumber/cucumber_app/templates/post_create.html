@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block import %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/static/js/script.js"></script>
+
+{% endblock %}
+{% block content %}
+
+    <div>
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Create" id="btn">
+    </div>
+    <h1 id="resp"></h1>
+
+{% endblock %}

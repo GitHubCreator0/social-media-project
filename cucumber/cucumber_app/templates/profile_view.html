@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <div class="d-flex justify-content-end" >
+                <img class="rounded-circle my-3" src="{{ user.image.url }}" height="200" width="200">
+            </div>
+        </div>
+        <div class="col-7">
+            {% if current_user == user.id %}
+                <div>
+                    <h4 class="my-4 px-3">{{ user.username }}
+                        <a class="btn btn-secondary btn-sm px-5 mx-3" href="/edit_profile/{{ current_user }}">Edit profile</a></h4>
+                    <br>
+                    <h4 class=" px-4">{{ user.email }}</h4>
+                    <h5 style="color: grey;" class=" my-3 px-4">{{ user.bio }}</h5>
+                </div>
+            {% else %}
+                 <div>
+
+                     {% if not is_subscribed %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #820747;" type="submit" class="btn btn-sm px-5 mx-3">Subscribe</button><span>{{ sub_count }}</span>
+                            </h4>
+                        </form>
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #005249;" type="submit" class="btn btn-sm px-5 mx-3">Unsubscribe</button><span>{{ sub_count }}</span>
+                            </h4>
+                        </form>
+                    {% endif %}
+                    <br>
+                    <h4 class=" px-4">{{ user.email }}</h4>
+                    <h5 style="color: grey;" class=" my-3 px-4">{{ user.bio }}</h5>
+                </div>
+            {% endif %}
+        </div>
+        <center>
+            Posts
+        </center>
+        <hr>
+        <div class="row">
+            <span>{% for post in posts %}
+                <a style="text-decoration: none; color: black;" href="/post/{{ post.id }}/">
+                    <img src="{{ post.image.url }}" height="200" width="300">
+                </a>
+            {% endfor %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

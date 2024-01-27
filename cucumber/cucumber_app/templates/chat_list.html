@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h2>Your Chats</h2>
+    <ul>
+        {% for chat in user_chats %}
+            <div class="rounded my-2" style="width: 1000px ; height: 40px; background-color: #8f798e; ">
+                <li><a class="my-1" href="{{ chat.room_name }}/" style="text-decoration: none; font-size: 20px; color: black; ">{{ chat.room_name }}</a></li>
+            </div>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Registration</title>
+    <title>Login</title>
     <style>
         body {
             height: 100vh;
@@ -29,7 +29,6 @@
             width: 100%;
         }
 
-
         form {
             border-radius: 40px;
             padding: 15px;
@@ -39,13 +38,13 @@
 </head>
 <body>
     <div class="island" style="color: white;">
-        <h1>Registration</h1>
-        <div>
-            <form method="post">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit">
-            </form>
+        <h1>Login</h1>
+              <form method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit">
+                </form>
+        <a href="/registration" style="text-decoration: none; color: #CBC3E3;">Create an account</a>
         </div>
     </div>
 

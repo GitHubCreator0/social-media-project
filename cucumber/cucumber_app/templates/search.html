@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+<h2>Search</h2>
+<br>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="btn btn-dark my-3" type="submit" value="Search">
+  </form>
+</div>
+
+<div style="width: 100%;">
+  <hr>
+    {% if results %}
+      <h3>Search Results:</h3>
+      <ul>
+        {% for user in results %}
+          <div class="rounded my-2" style="height: 50px; background-color: #8f798e; ">
+            <p class="my-2 mx-2"><a href="/profile_view/{{ user.id }}/" style="text-decoration: none; font-size: 20px; color: black; "><img style="border: 1px solid #51414F;" class="rounded-circle" src="{{ user.image.url }}" width="35" height="35">@{{ user.username }}</a>
+            <a href="/create_chat/{{ user.id }}" class="btn btn-outline-dark btn-sm my-1" style="margin-left: 460px; text-decoration: none; font-size: 20px; color: black; ">Create chat</a></p>
+          </div>
+        {% endfor %}
+      </ul>
+    {% endif %}
+</div>
+{% endblock %}

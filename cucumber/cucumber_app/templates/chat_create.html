@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h2>Create Chat</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-dark my-3" type="submit" value="Create Chat">
+    </form>
+</div>
+{% endblock %}
