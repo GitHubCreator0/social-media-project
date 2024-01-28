@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from .forms import PostForm, RegistrationForm, LoginForm, CommentForm, ProfileForm, ChatCreateForm, SearchForm, ProfileEditForm, MessageForm
@@ -113,11 +114,15 @@ class PostView(TemplateView):
         if form.is_valid():
             Comment.objects.create(user=request.user, post=post, text=form.cleaned_data['text'])
             comments = Comment.objects.filter(post=post)
+            likes = Like.objects.filter(post=post, user=self.request.user).exists()
+            like_count = Like.objects.filter(post=post).count()
 
             context = {
                 'post': post,
                 'comments': comments,
                 'form': form,
+                'likes': likes,
+                'like_count': like_count,
             }
             return render(request, 'post.html', context)
 
@@ -131,18 +136,20 @@ class ProfileView(TemplateView):
     template_name = 'profile_view.html'
     form = ProfileForm
 
-    def get_context_data(self, user_id, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.kwargs.get('user_id')
+        user = User.objects.get(id=self.kwargs.get('user_id'))
         current_user = self.request.user.id
-        posts = Post.objects.filter(user_id=user)
-        sub_count = Subscribe.objects.filter(subscribed_to=user_id).count()
-        context['user'] = User.objects.get(id=user)
+        posts = Post.objects.filter(user=user)
+        sub_count = Subscribe.objects.filter(subscribed_to=user).count()
+        post_count = len(posts)
+        context['user'] = user
         context['form'] = ProfileForm
         context['current_user'] = current_user
         context['posts'] = posts
-        context['subscribed_user'] = User.objects.get(id=user_id)
+        context['subscribed_user'] = User.objects.get(id=user.id)
         context['sub_count'] = sub_count
+        context['post_count'] = post_count
         context['is_subscribed'] = Subscribe.objects.filter(subscriber=self.request.user,
                                                             subscribed_to=context['subscribed_user']).exists()
         return context

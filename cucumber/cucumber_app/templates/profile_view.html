@@ -12,8 +12,8 @@
                 <div>
                     <h4 class="my-4 px-3">{{ user.username }}
                         <a class="btn btn-secondary btn-sm px-5 mx-3" href="/edit_profile/{{ current_user }}">Edit profile</a></h4>
-                    <br>
-                    <h4 class=" px-4">{{ user.email }}</h4>
+                    <hr>
+                    <p style="font-size: 20px" class=" px-4"><span style="font-size: 23px">{{ sub_count }}</span> followers <span style="font-size: 25px">{{ post_count }} </span> posts </p>
                     <h5 style="color: grey;" class=" my-3 px-4">{{ user.bio }}</h5>
                 </div>
             {% else %}
@@ -22,18 +22,18 @@
                      {% if not is_subscribed %}
                         <form method="post">
                             {% csrf_token %}
-                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #820747;" type="submit" class="btn btn-sm px-5 mx-3">Subscribe</button><span>{{ sub_count }}</span>
+                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #820747;" type="submit" class="btn btn-sm px-5 mx-3">Subscribe</button>
                             </h4>
                         </form>
                     {% else %}
                         <form method="post">
                             {% csrf_token %}
-                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #005249;" type="submit" class="btn btn-sm px-5 mx-3">Unsubscribe</button><span>{{ sub_count }}</span>
+                            <h4 class="my-4 px-3">{{ user.username }}<button style="color: white; background-color: #005249;" type="submit" class="btn btn-sm px-5 mx-3">Unsubscribe</button>
                             </h4>
                         </form>
                     {% endif %}
-                    <br>
-                    <h4 class=" px-4">{{ user.email }}</h4>
+                    <hr>
+                    <p style="font-size: 20px" class=" px-4"><span style="font-size: 23px">{{ sub_count }}</span> followers <span style="font-size: 25px">{{ post_count }} </span> posts </p>
                     <h5 style="color: grey;" class=" my-3 px-4">{{ user.bio }}</h5>
                 </div>
             {% endif %}
